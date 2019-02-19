@@ -153,10 +153,19 @@ public void clone_the_workobject() throws Throwable {
 	 SDriver.WaitfordocStateReady(Driver);
 	 String Status;
 	 assertEquals( Status=Driver.findElement(WorkOdersHome.Optstatus).getText(), "OPT_COMPLETED");
+	 for (int i=0; i<3;i++)
+{
+	if (Status!= "OPT_COMPLETED")
+
+	 {
+		 
+		 Driver.navigate().refresh();
+		
+	 }
+	 else
+		 System.out.println("The page is refreshed");
 	 
-	 
-	 
-	 
+}
 	 
 }
 
