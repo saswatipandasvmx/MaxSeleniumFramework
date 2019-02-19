@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+<appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
+    <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%p] %c{1} %m%n"/>
+    </layout>
+</appender> 
+
+<appender name="debug" class="com.myproject.log.TimeSizeRollingFileAppender">
+    <param name="File" value="target/debug.log"/>
+    <param name="MaxBackupIndex" value="300"/>
+    <param name="Encoding" value="GB2312"/>
+    <!--CHANGE THIS TO A LARGER SIZE EG : 20MB. USE 1MB TO TEST IF THE SETTING WORKS.-->
+    <param name="MaxFileSize" value="1MB"/>
+    <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+    <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%d{ISO8601} %p [%c] - [%m]%n"/>
+    </layout>
+</appender>
+
+<!--CHANGE name TO ROOT PACKAGE NAME OF YOUR PROJECT THAT YOU WANT TO LOG.-->
+<logger name="com.myproject" additivity="false">
+    <level value="debug"/>
+    <appender-ref ref="consoleAppender"/>
+    <appender-ref ref="debug"/>
+</logger>
+
+
+<logger name="org.springframework" additivity="false">
+    <level value="debug"/>
+    <appender-ref ref="consoleAppender"/>
+    <appender-ref ref="debug"/>
+</logger>
+
+<logger name="org.hibernate" additivity="false">
+    <level value="debug"/>
+    <appender-ref ref="consoleAppender"/>
+    <appender-ref ref="debug"/>
+</logger>
+
+<root>
+    <priority value="INFO"></priority>
+    <appender-ref ref="consoleAppender"/>
+    <appender-ref ref="debug"/>
+ </root>
